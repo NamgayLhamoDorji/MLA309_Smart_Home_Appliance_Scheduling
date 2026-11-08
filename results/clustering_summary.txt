@@ -1,0 +1,12 @@
+Households clustered: 300
+Clustered on: normalized profiles
+k range tried: 2 to 10
+Chosen k: 3
+Silhouette score (K-means, k=3): 0.189
+Silhouette score (hierarchical, k=3): 0.175
+
+                              name  households  mean_kw  peak_hour  peak_kw
+cluster                                                                    
+0        evening-peak (peak 18:00)         189    0.428         18    0.600
+1        evening-peak (peak 20:00)         106    0.375         20    0.683
+2                   high-use night           5    0.969          0    3.001

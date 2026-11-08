@@ -1,0 +1,4 @@
+cluster,name,households,mean_kw,peak_hour,peak_kw
+0,evening-peak (peak 18:00),189,0.428,18,0.6
+1,evening-peak (peak 20:00),106,0.375,20,0.683
+2,high-use night,5,0.969,0,3.001

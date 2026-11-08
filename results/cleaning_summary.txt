@@ -1,0 +1,13 @@
+Households in the file: 5560
+Dropped, do not cover 2013-01-01 to 2013-12-31: 497
+Dropped, more than 5% filled-in or missing readings: 103
+Households passing both checks: 4960
+Random sample taken for the next steps: 360
+Households loaded: 360
+Period: 2013-01-01 00:00:00 to 2013-12-31 23:30:00
+Half-hour rows: 17520
+Negative readings set to missing: 0
+Dropped for >5% missing: 0
+Dropped for flat or zero usage: 0
+Households after cleaning: 360
+Households kept for clustering: 300
