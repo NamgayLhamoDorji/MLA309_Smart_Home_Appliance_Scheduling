@@ -1,0 +1,13 @@
+cluster,cluster_name,appliance,preferred_h,allowed_window_h,optimized_start_h,delay_h
+0,Cluster 0,Washing machine,18,2.2,20,2
+0,Cluster 0,Dishwasher,20,2.2,22,2
+0,Cluster 0,Tumble dryer,19,2.3,19,0
+0,Cluster 0,Water heater,19,2.3,20,1
+1,Cluster 1,Washing machine,18,2.2,18,0
+1,Cluster 1,Dishwasher,20,2.2,22,2
+1,Cluster 1,Tumble dryer,19,2.3,21,2
+1,Cluster 1,Water heater,19,2.3,19,0
+2,Cluster 2,Washing machine,18,2.3,20,2
+2,Cluster 2,Dishwasher,20,4.7,22,2
+2,Cluster 2,Tumble dryer,19,2.5,19,0
+2,Cluster 2,Water heater,19,2.5,20,1
