@@ -2,7 +2,7 @@
 Reads MEMBER 1's result files (cluster_centroids.csv, optionally household files)
 so you can run stages 2 and 3 without the raw London data.
 """
-import re
+import os, re
 import numpy as np, pandas as pd
 
 HOURS = [f"h{h:02d}" for h in range(24)]
@@ -25,7 +25,9 @@ def _hour_columns(df):
     raise SystemExit(f"Could not find 24 hourly columns in the centroids file. Columns are: {list(df.columns)}\n"
                      "Rename them to h00..h23 (or 0..23) and run again.")
 
-def load_centroids(path):
+def load_centroids(path, summary_path=None):
+    """Centroids in kW (one row per cluster). If cluster_summary.csv sits next to the file (Member 1 writes it),
+    the cluster names and household counts are taken from it."""
     df = pd.read_csv(path)
     hcols = _hour_columns(df)
     id_c = _pick(df.columns, ["cluster", "cluster_id", "label", "cluster_label"])
@@ -35,6 +37,15 @@ def load_centroids(path):
     cent = pd.DataFrame(df[hcols].values.astype(float), columns=HOURS, index=pd.Index(ids, name="cluster"))
     cent.insert(0, "name", df[nm_c].astype(str).values if nm_c else [f"Cluster {i}" for i in ids])
     cent.insert(1, "size", df[sz_c].astype(int).values if sz_c else 50)
+    summ = summary_path or os.path.join(os.path.dirname(os.path.abspath(path)), "cluster_summary.csv")
+    if os.path.exists(summ):
+        s = pd.read_csv(summ)
+        s_id = _pick(s.columns, ["cluster", "cluster_id", "label"]) or s.columns[0]
+        s = s.set_index(s[s_id].astype(int))
+        n_c, h_c = _pick(s.columns, ["name", "cluster_name"]), _pick(s.columns, ["households", "size", "n"])
+        if n_c: cent["name"] = [str(s.loc[i, n_c]) if i in s.index else cent.loc[i, "name"] for i in cent.index]
+        if h_c: cent["size"] = [int(s.loc[i, h_c]) if i in s.index else int(cent.loc[i, "size"]) for i in cent.index]
+        print(f"[adapter] names and sizes taken from {os.path.basename(summ)}")
     v = cent[HOURS].values
     print(f"[adapter] {len(cent)} clusters; centroid values min {v.min():.3f}, max {v.max():.3f}, mean {v.mean():.3f}")
     if v.min() < 0:

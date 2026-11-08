@@ -21,6 +21,13 @@ def set_load_range(max_kw):
     global LOAD_MAX
     LOAD_MAX = float(max_kw)
 
+def load_range_from_profiles(profiles, percentile=None):
+    """Universe of the 'expected load' input = the `percentile`-th percentile of all household x hour
+    kW values (default C.LOAD_PERCENTILE). 'High' then means a load that only ~5% of household-hours reach.
+    Do NOT use the largest centroid: a tiny outlier cluster would push every normal household into 'low'."""
+    p = C.LOAD_PERCENTILE if percentile is None else percentile
+    return float(np.percentile(np.asarray(profiles, float), p))
+
 def trimf(x, a, b, c):
     x = np.asarray(x, float)
     left  = np.where(b > a, (x - a) / (b - a + 1e-12), (x >= a).astype(float))

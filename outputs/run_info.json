@@ -1,1 +1,1 @@
-{"k": 3, "silhouette": NaN, "n_households": 150}
+{"k": 3, "silhouette": 0.189, "n_households": 300, "n_seeds": 10, "fuzzy_load_universe_kw": 1.039, "load_percentile": 95}

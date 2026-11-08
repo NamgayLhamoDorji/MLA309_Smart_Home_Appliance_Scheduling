@@ -17,6 +17,9 @@ AUTO_K_RANGE = range(3, 7)                 # we want at least 3 groups so there 
 
 # ------------------------------------------------------------------ fuzzy
 MAX_SHIFT_HOURS = 12                       # tolerance 1.0 = may move 12 h
+LOAD_PERCENTILE = 95                       # "high load" = the load that only 5% of household-hours exceed.
+                                           # (NOT the largest centroid: one 5-household cluster would make
+                                           #  every normal household look "low load".)
 URGENCY_VALUES = {"low": 0.15, "medium": 0.50, "high": 0.85}   # numeric urgency on a 0-1 scale
 
 # --------------------------------------------------- appliances (Step 0)

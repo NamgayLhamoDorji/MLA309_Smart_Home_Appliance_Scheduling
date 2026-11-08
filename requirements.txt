@@ -1,6 +1,5 @@
-pandas
+pandas>=2.2
 numpy
 scikit-learn
-scikit-fuzzy
-deap
 matplotlib
+tabulate

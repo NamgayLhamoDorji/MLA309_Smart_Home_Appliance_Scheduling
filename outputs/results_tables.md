@@ -1,25 +1,33 @@
-Baseline (no scheduling): peak-to-average ratio 5.55
+Baseline (no scheduling): peak-to-average ratio 6.65
+
+Mean Â± std over 10 GA seeds, household-weighted over 300 real households.
 
 | Variant                 | Peak reduction (%)   | Peak-to-average ratio   | Average delay (h)   | Urgency-weighted delay   |
 |:------------------------|:---------------------|:------------------------|:--------------------|:-------------------------|
-| GA only                 | 41.9 ± 3.7           | 3.15 ± 0.15             | 1.48 ± 0.13         | 0.81 ± 0.07              |
-| Clustering + GA         | 51.2 ± 0.1           | 2.65 ± 0.01             | 2.45 ± 0.23         | 1.31 ± 0.22              |
-| Fuzzy + GA              | 39.6 ± 0.2           | 3.34 ± 0.01             | 1.02 ± 0.04         | 0.35 ± 0.03              |
-| Clustering + Fuzzy + GA | 40.1 ± 0.2           | 3.32 ± 0.01             | 1.15 ± 0.04         | 0.45 ± 0.03              |
+| GA only                 | 46.4 Â± 0.3           | 3.51 Â± 0.02             | 1.43 Â± 0.13         | 0.86 Â± 0.10              |
+| Clustering + GA         | 53.2 Â± 0.3           | 3.09 Â± 0.02             | 2.43 Â± 0.07         | 1.28 Â± 0.14              |
+| Fuzzy + GA              | 45.3 Â± 2.0           | 3.58 Â± 0.13             | 1.39 Â± 0.15         | 0.59 Â± 0.10              |
+| Clustering + Fuzzy + GA | 49.2 Â± 1.8           | 3.33 Â± 0.12             | 1.87 Â± 0.15         | 0.73 Â± 0.07              |
 
-Silhouette (k=3): nan
+Silhouette (K-means, k=3): 0.189
 
-|   cluster | cluster_name   | appliance       |   preferred_h |   allowed_window_h |   optimized_start_h |   delay_h |
-|----------:|:---------------|:----------------|--------------:|-------------------:|--------------------:|----------:|
-|         0 | Cluster 0      | Washing machine |            18 |                2.2 |                  20 |         2 |
-|         0 | Cluster 0      | Dishwasher      |            20 |                2.2 |                  22 |         2 |
-|         0 | Cluster 0      | Tumble dryer    |            19 |                2.3 |                  19 |         0 |
-|         0 | Cluster 0      | Water heater    |            19 |                2.3 |                  20 |         1 |
-|         1 | Cluster 1      | Washing machine |            18 |                2.2 |                  18 |         0 |
-|         1 | Cluster 1      | Dishwasher      |            20 |                2.2 |                  22 |         2 |
-|         1 | Cluster 1      | Tumble dryer    |            19 |                2.3 |                  21 |         2 |
-|         1 | Cluster 1      | Water heater    |            19 |                2.3 |                  19 |         0 |
-|         2 | Cluster 2      | Washing machine |            18 |                2.3 |                  20 |         2 |
-|         2 | Cluster 2      | Dishwasher      |            20 |                4.7 |                  22 |         2 |
-|         2 | Cluster 2      | Tumble dryer    |            19 |                2.5 |                  19 |         0 |
-|         2 | Cluster 2      | Water heater    |            19 |                2.5 |                  20 |         1 |
+|   Cluster | Name                      |   Households |
+|----------:|:--------------------------|-------------:|
+|         0 | evening-peak (peak 18:00) |          189 |
+|         1 | evening-peak (peak 20:00) |          106 |
+|         2 | high-use night            |            5 |
+
+|   cluster | cluster_name              | appliance       | urgency   |   preferred_h |   allowed_window_h |   optimized_start_h |   delay_h |
+|----------:|:--------------------------|:----------------|:----------|--------------:|-------------------:|--------------------:|----------:|
+|         0 | evening-peak (peak 18:00) | Washing machine | medium    |            18 |                3.8 |                  18 |         0 |
+|         0 | evening-peak (peak 18:00) | Dishwasher      | low       |            20 |                5.8 |                  23 |         3 |
+|         0 | evening-peak (peak 18:00) | Tumble dryer    | medium    |            19 |                3.9 |                  22 |         3 |
+|         0 | evening-peak (peak 18:00) | Water heater    | high      |            19 |                2.3 |                  20 |         1 |
+|         1 | evening-peak (peak 20:00) | Washing machine | medium    |            18 |                3.7 |                  18 |         0 |
+|         1 | evening-peak (peak 20:00) | Dishwasher      | low       |            20 |                6   |                   0 |         4 |
+|         1 | evening-peak (peak 20:00) | Tumble dryer    | medium    |            19 |                4.8 |                  23 |         4 |
+|         1 | evening-peak (peak 20:00) | Water heater    | high      |            19 |                2.4 |                  20 |         1 |
+|         2 | high-use night            | Washing machine | medium    |            18 |                6   |                  22 |         4 |
+|         2 | high-use night            | Dishwasher      | low       |            20 |                7.5 |                  22 |         2 |
+|         2 | high-use night            | Tumble dryer    | medium    |            19 |                6   |                  21 |         2 |
+|         2 | high-use night            | Water heater    | high      |            19 |                2.3 |                  19 |         0 |
